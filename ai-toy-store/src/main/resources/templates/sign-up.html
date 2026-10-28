@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<h1>Create an Account</h1>
+		<form th:action="@{/sign-up}" th:object="${signUpForm}" method="post" style="max-width: 450px">
+			<div class="row">
+				<div class="col mb-3">
+					<label class="form-label">First name</label>
+					<input type="text" class="form-control" th:field="*{firstName}">
+					<div class="text-danger small" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+				</div>
+				<div class="col mb-3">
+					<label class="form-label">Last name</label>
+					<input type="text" class="form-control" th:field="*{lastName}">
+					<div class="text-danger small" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Email</label>
+				<input type="email" class="form-control" th:field="*{email}">
+				<div class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Phone (optional)</label>
+				<input type="text" class="form-control" th:field="*{phone}">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Password</label>
+				<input type="password" class="form-control" th:field="*{password}">
+				<div class="text-danger small" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+			</div>
+			<button class="btn btn-primary">Sign up</button>
+			<p class="mt-3">Already have an account? <a th:href="@{/login}">Log in</a></p>
+		</form>
+	</main>
+</body>
+</html>

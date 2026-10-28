@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h1 th:text="${heading}">Shop</h1>
+			<form th:action="@{/shop}" method="get" th:if="${sort != null}">
+				<select name="sort" class="form-select" onchange="this.form.submit()">
+					<option value="name" th:selected="${sort == 'name'}">Name</option>
+					<option value="price-low" th:selected="${sort == 'price-low'}">Price: low to high</option>
+					<option value="price-high" th:selected="${sort == 'price-high'}">Price: high to low</option>
+				</select>
+			</form>
+		</div>
+		<p th:if="${products.isEmpty()}">No products here yet.</p>
+		<div class="row row-cols-1 row-cols-md-3 g-3">
+			<div class="col" th:each="p : ${products}">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${p.name}">Product</h5>
+						<p class="card-text text-muted small" th:text="${p.category.name}"></p>
+						<p class="card-text fw-bold" th:text="${#numbers.formatCurrency(p.price)}"></p>
+						<a class="btn btn-sm btn-outline-primary" th:href="@{/shop/item/{id}(id=${p.id})}">View</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

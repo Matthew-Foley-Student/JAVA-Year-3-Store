@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<h1>Create Product</h1>
+		<form th:action="@{/products/create}" th:object="${productForm}" method="post" style="max-width: 600px">
+			<th:block th:replace="fragments/product-fields :: fields"></th:block>
+			<button class="btn btn-success">Create</button>
+			<a class="btn btn-link" th:href="@{/products}">Cancel</a>
+		</form>
+	</main>
+</body>
+</html>
