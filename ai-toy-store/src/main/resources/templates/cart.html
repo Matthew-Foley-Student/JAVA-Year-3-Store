@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<h1>Your Cart</h1>
+		<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+		<p th:if="${cart.items.isEmpty()}">Your cart is empty. <a th:href="@{/shop}">Go shopping</a></p>
+		<table class="table" th:if="${!cart.items.isEmpty()}">
+			<thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead>
+			<tbody>
+				<tr th:each="item : ${cart.items}">
+					<td th:text="${item.product.name}"></td>
+					<td th:text="${#numbers.formatCurrency(item.product.price)}"></td>
+					<td>
+						<form th:action="@{/cart/update}" method="post" class="d-flex gap-1">
+							<input type="hidden" name="cartItemId" th:value="${item.id}">
+							<input type="number" name="quantity" th:value="${item.quantity}" min="0" class="form-control form-control-sm" style="width: 70px">
+							<button class="btn btn-sm btn-outline-secondary">Update</button>
+						</form>
+					</td>
+					<td th:text="${#numbers.formatCurrency(item.lineTotal)}"></td>
+					<td>
+						<form th:action="@{/cart/remove}" method="post">
+							<input type="hidden" name="cartItemId" th:value="${item.id}">
+							<button class="btn btn-sm btn-outline-danger">Remove</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:if="${!cart.items.isEmpty()}" style="max-width: 300px" class="ms-auto">
+			<p>Subtotal: <span th:text="${#numbers.formatCurrency(subtotal)}"></span></p>
+			<p>Tax: <span th:text="${#numbers.formatCurrency(tax)}"></span></p>
+			<p>Shipping: <span th:text="${#numbers.formatCurrency(shipping)}"></span></p>
+			<h4>Total: <span th:text="${#numbers.formatCurrency(total)}"></span></h4>
+			<!-- TODO: promo codes -->
+			<form th:action="@{/cart/checkout}" method="post">
+				<button class="btn btn-success w-100">Place order</button>
+			</form>
+		</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<a th:href="@{/products}">&larr; All products</a>
+		<h1 class="mt-2" th:text="${product.name}"></h1>
+		<table class="table" style="max-width: 500px">
+			<tr><th>ID</th><td th:text="${product.id}"></td></tr>
+			<tr><th>SKU</th><td th:text="${product.sku}"></td></tr>
+			<tr><th>Category</th><td th:text="${product.category.name}"></td></tr>
+			<tr><th>Description</th><td th:text="${product.description}"></td></tr>
+			<tr><th>Price</th><td th:text="${#numbers.formatCurrency(product.price)}"></td></tr>
+			<tr><th>Stock</th><td th:text="${product.stock}"></td></tr>
+			<tr><th>Featured</th><td th:text="${product.featured} ? 'Yes' : 'No'"></td></tr>
+			<tr><th>Active</th><td th:text="${product.active} ? 'Yes' : 'No'"></td></tr>
+		</table>
+		<a class="btn btn-outline-secondary" th:href="@{/products/update/{id}(id=${product.id})}">Edit</a>
+		<a class="btn btn-outline-danger" th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
+	</main>
+</body>
+</html>

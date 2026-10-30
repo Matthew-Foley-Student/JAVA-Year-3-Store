@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<h1>My Account</h1>
+		<div class="alert alert-info" th:if="${message}" th:text="${message}"></div>
+		<div class="card mb-4" style="max-width: 500px">
+			<div class="card-body">
+				<p><strong>Name:</strong> <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
+				<p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+				<p><strong>Phone:</strong> <span th:text="${user.phone}"></span></p>
+				<p><strong>Member since:</strong> <span th:text="${#temporals.format(user.createdAt, 'MMM d, yyyy')}"></span></p>
+				<!-- TODO: update details, delete account, addresses, loyalty points -->
+			</div>
+		</div>
+		<h2>Purchase History</h2>
+		<p th:if="${orders.isEmpty()}">No orders yet.</p>
+		<table class="table" th:if="${!orders.isEmpty()}">
+			<thead><tr><th>Order #</th><th>Date</th><th>Items</th><th>Status</th><th>Total</th></tr></thead>
+			<tbody>
+				<tr th:each="o : ${orders}">
+					<td th:text="${o.id}"></td>
+					<td th:text="${#temporals.format(o.placedAt, 'MMM d, yyyy')}"></td>
+					<td th:text="${o.items.size()}"></td>
+					<td th:text="${o.status}"></td>
+					<td th:text="${#numbers.formatCurrency(o.orderTotal)}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>
