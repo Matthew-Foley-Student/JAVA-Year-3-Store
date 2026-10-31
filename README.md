@@ -67,3 +67,38 @@ WHERE table_schema = 'ai_toy_store'
 The database is intended for integration with the team's Java Spring Boot application. Coordinate entity mappings and repository methods with the backend developer before changing table definitions.
 
 Do not commit database passwords, connection secrets, payment card data, or actual customer information to the public repository. The `.mwb.bak` file is a model backup and may need to be restored through MySQL Workbench to obtain an editable model.
+
+## Milestone 2 Database Updates
+
+**Project:** ShiftTech Online Retail Store  
+**Database Developer:** Dominick Spegnolo
+
+### Changes Made
+
+For Milestone 2, I reviewed and updated the MySQL database to support future registration and login functionality.
+
+- Added a `username` column to the `users` table.
+- Verified all 22 database tables.
+- Confirmed 23 foreign key relationships.
+- Reviewed referential integrity constraints.
+- Tested inventory relationships and found zero orphaned inventory records.
+- Updated and exported the Entity Relationship Diagram (ERD).
+- Prepared updated database documentation.
+
+### SQL Execution Order
+
+For a fresh database installation, run these scripts in MySQL Workbench:
+
+1. `ai_toy_store_schema.sql`
+2. `ai_toy_store_phase2_expansion.sql`
+3. `ai_toy_store_milestone2_updates.sql`
+
+**Important:** Run each update script only once. Do not rerun the Milestone 2 script if the `username` column already exists.
+
+### Future Spring Boot Integration
+
+The database is prepared for future integration with the Spring Boot application.
+
+For Milestone 2, registration and login do not require a database connection. Database integration is planned for Milestone 4, and Spring Security is scheduled for Milestone 6.
+
+The backend developer will coordinate Java entity mappings, repository operations, and application validation during future milestones.
