@@ -6,8 +6,9 @@ Spring Boot 2.7 / Java 17 / Spring Data JPA / Thymeleaf / MySQL
 
 ## How to run
 
-1. Set up the database first using Dominick's scripts in the repo root
-   (`ai_toy_store_schema.sql` then `ai_toy_store_phase2_expansion.sql`).
+1. Set up the database first using Dominick's scripts, in this order:
+   `ai_toy_store_schema.sql`, then `ai_toy_store_phase2_expansion.sql` (both in the repo root),
+   then `database/ai_toy_store_milestone2_updates.sql..sql` (adds the `username` column). Run each one only once.
 2. In STS: File > Import > Maven > Existing Maven Projects and pick the `ai-toy-store` folder.
 3. Open `src/main/resources/application.properties` and set your MySQL username and password.
    Don't commit your real password. You can also set a `DB_PASSWORD` environment variable
@@ -57,9 +58,11 @@ content in `<main layout:fragment="content">`. The nav is in `templates/fragment
   - `InMemoryUserService` (on now): users are kept in a map in memory, so they disappear when the app restarts.
   - `UserService`: saves users to the MySQL `users` table.
 - Switch between them in `application.properties` with `app.users.in-memory=true` or `false`.
-- Test account for the in-memory version: `test@aitoystore.com` / `password123`.
+- Sign up asks for first name, last name, email, phone number, username and password (all required).
+- Login takes the username or the email, plus the password.
+- Test account for the in-memory version: `testuser` (or `test@aitoystore.com`) / `password123`.
 - The cart needs a real user row, so while users are in memory the cart sends you to your account page
-  with a message instead. It works again with `app.users.in-memory=false`.
+  with a message instead. It works again with `app.users.in-memory=false` (after running Dominick's username script).
 
 ## Notes / still to do
 

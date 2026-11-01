@@ -104,7 +104,7 @@ public class CartController {
 	// and the cart can't be created. Show a message instead of an error page.
 	@ExceptionHandler(NoSuchElementException.class)
 	public String cartUnavailable(RedirectAttributes redirect) {
-		redirect.addFlashAttribute("message", "The cart will be available once accounts are saved to the database (Milestone 3).");
+		redirect.addFlashAttribute("message", "The cart will be available once accounts are saved to the database.");
 		return "redirect:/account";
 	}
 }

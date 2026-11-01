@@ -2,8 +2,10 @@ package com.gcu.business;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,10 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	private final InventoryRepository inventoryRepository;
 	private final CartService cartService;
+
+	// Milestone 2: accounts are only in memory, so they can't have orders in the database yet
+	@Value("${app.users.in-memory:true}")
+	private boolean usersInMemory;
 
 	public OrderService(OrderRepository orderRepository, InventoryRepository inventoryRepository,
 			CartService cartService) {
@@ -78,6 +84,9 @@ public class OrderService {
 	}
 
 	public List<Order> getOrdersForUser(Long userId) {
+		if (usersInMemory) {
+			return new ArrayList<>();
+		}
 		return orderRepository.findByUserIdOrderByPlacedAtDesc(userId);
 	}
 }

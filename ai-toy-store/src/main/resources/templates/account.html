@@ -8,6 +8,7 @@
 		<div class="card mb-4" style="max-width: 500px">
 			<div class="card-body">
 				<p><strong>Name:</strong> <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
+				<p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
 				<p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
 				<p><strong>Phone:</strong> <span th:text="${user.phone}"></span></p>
 				<p><strong>Member since:</strong> <span th:text="${#temporals.format(user.createdAt, 'MMM d, yyyy')}"></span></p>

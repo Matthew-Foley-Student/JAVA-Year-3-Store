@@ -40,6 +40,10 @@ public class User {
 	@Column(length = 25)
 	private String phone;
 
+	// column added in Dominick's Milestone 2 script (ai_toy_store_milestone2_updates.sql)
+	@Column(length = 100)
+	private String username;
+
 	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 
@@ -116,6 +120,14 @@ public class User {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public LocalDate getDateOfBirth() {

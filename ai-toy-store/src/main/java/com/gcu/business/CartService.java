@@ -1,5 +1,8 @@
 package com.gcu.business;
 
+import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,10 @@ public class CartService {
 	private final ProductRepository productRepository;
 	private final UserRepository userRepository;
 
+	// Milestone 2: accounts are only kept in memory, so there's no users row to link a cart to yet
+	@Value("${app.users.in-memory:true}")
+	private boolean usersInMemory;
+
 	public CartService(ShoppingCartRepository cartRepository, ProductRepository productRepository,
 			UserRepository userRepository) {
 		this.cartRepository = cartRepository;
@@ -28,6 +35,10 @@ public class CartService {
 	// gets the user's cart, or makes a new one the first time
 	@Transactional
 	public ShoppingCart getCart(Long userId) {
+		if (usersInMemory) {
+			// CartController catches this and shows a message instead of an error page
+			throw new NoSuchElementException("The cart needs accounts saved in the database");
+		}
 		ShoppingCart cart = cartRepository.findByUserId(userId).orElse(null);
 		if (cart == null) {
 			User user = userRepository.findById(userId).orElseThrow();

@@ -42,6 +42,9 @@ public class AccountController {
 		if (signUpForm.getEmail() != null && userService.emailTaken(signUpForm.getEmail())) {
 			result.rejectValue("email", "duplicate", "An account with that email already exists");
 		}
+		if (signUpForm.getUsername() != null && userService.usernameTaken(signUpForm.getUsername())) {
+			result.rejectValue("username", "duplicate", "That username is already taken");
+		}
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Sign Up");
 			return "sign-up";
@@ -63,9 +66,9 @@ public class AccountController {
 			HttpSession session) {
 		User user = null;
 		if (!result.hasErrors()) {
-			user = userService.login(loginForm.getEmail(), loginForm.getPassword());
+			user = userService.login(loginForm.getUsername(), loginForm.getPassword());
 			if (user == null) {
-				result.reject("badLogin", "Email or password is incorrect");
+				result.reject("badLogin", "Username or password is incorrect");
 			}
 		}
 		if (result.hasErrors()) {

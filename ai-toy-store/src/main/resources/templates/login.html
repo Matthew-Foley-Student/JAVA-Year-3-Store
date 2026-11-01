@@ -7,9 +7,9 @@
 		<form th:action="@{/login}" th:object="${loginForm}" method="post" style="max-width: 400px">
 			<div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 			<div class="mb-3">
-				<label class="form-label">Email</label>
-				<input type="email" class="form-control" th:field="*{email}">
-				<div class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				<label class="form-label">Username or email</label>
+				<input type="text" class="form-control" th:field="*{username}">
+				<div class="text-danger small" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Password</label>
