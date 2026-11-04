@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<a th:href="@{/shop}">&larr; Back to shop</a>
+		<h1 class="mt-2" th:text="${product.name}"></h1>
+		<p class="text-muted" th:text="${product.category.name}"></p>
+		<p th:text="${product.description}"></p>
+		<h3 th:text="${#numbers.formatCurrency(product.price)}"></h3>
+		<p th:text="${product.stock > 0} ? ${product.stock} + ' in stock' : 'Out of stock'"></p>
+		<form th:action="@{/cart/add}" method="post" class="d-flex gap-2" style="max-width: 250px" th:if="${product.stock > 0}">
+			<input type="hidden" name="productId" th:value="${product.id}">
+			<input type="number" name="quantity" value="1" min="1" th:max="${product.stock}" class="form-control">
+			<button type="submit" class="btn btn-primary">Add to cart</button>
+		</form>
+	</main>
+</body>
+</html>

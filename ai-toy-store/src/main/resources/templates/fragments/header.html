@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- nav bar used by layouts/defaultTemplate.html. Brittney: swap in the real nav from the wireframes here -->
+	<nav th:fragment="header" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/home}">AI Toy Store</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" th:href="@{/shop}">All Products</a></li>
+							<li><a class="dropdown-item" th:href="@{/shop/ai-toy-models}">AI Toy Models</a></li>
+							<li><a class="dropdown-item" th:href="@{/shop/accessories}">Accessories</a></li>
+							<li><a class="dropdown-item" th:href="@{/shop/add-ons}">Add-ons</a></li>
+							<li><a class="dropdown-item" th:href="@{/shop/merch}">Merch</a></li>
+						</ul>
+					</li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/about-us}">About Us</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/help-faqs}">Help</a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
+					<th:block th:if="${session.userId == null}">
+						<li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/sign-up}">Sign Up</a></li>
+					</th:block>
+					<th:block th:if="${session.userId != null}">
+						<li class="nav-item"><a class="nav-link" th:href="@{/account}" th:text="'Hi, ' + ${session.userName}">Account</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+					</th:block>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</body>
+</html>

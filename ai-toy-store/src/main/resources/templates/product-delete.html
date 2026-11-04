@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+		<h1>Delete Product</h1>
+		<p>Are you sure you want to delete <strong th:text="${product.name}"></strong> (<span th:text="${product.sku}"></span>)?</p>
+		<p class="text-muted small">If this product is already in a cart or an order it will be hidden from the shop instead of deleted.</p>
+		<form th:action="@{/products/delete/{id}(id=${product.id})}" method="post">
+			<button class="btn btn-danger">Yes, delete it</button>
+			<a class="btn btn-link" th:href="@{/products/{id}(id=${product.id})}">Cancel</a>
+		</form>
+	</main>
+</body>
+</html>
