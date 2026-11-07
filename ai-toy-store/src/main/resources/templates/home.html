@@ -10,6 +10,22 @@
 			<a class="btn btn-outline-secondary" th:href="@{/sign-up}" th:if="${session.userId == null}">Sign up</a>
 		</div>
 
+		<!--The Summary of latest features-->
+		<div class = "home-body">
+			<h1>Latest Software</h1>
+
+			<p>
+		    lorem ipsum dolor sit amet consectetur adipiscing elit nobis
+		    lit voluptatum et cupiditate optio repellendus culpa aute
+		    in deleniti nobis nobis accusamus mollit est voluptatum
+		   	officia sint cum sint nulla occaecat voluptas cupidatat
+		    consequat temporibus repellendus ut officia blanditiis
+		    qui nostrud expedita possimus officia velit consectetur
+		    quod illum elit dignissimos
+			</p>
+		</div>
+		
+		<!--New Arrivals card block-->
 		<h2>New Arrivals</h2>
 		<div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
 			<div class="col" th:each="p : ${newArrivals}">
@@ -24,6 +40,9 @@
 			</div>
 		</div>
 
+	
+		
+		<!--Card blocks of features-->
 		<th:block th:if="${!featured.isEmpty()}">
 			<h2>Featured</h2>
 			<div class="row row-cols-1 row-cols-md-4 g-3">
@@ -39,7 +58,56 @@
 			</div>
 			</div>
 		</th:block>
+		
+		<!--START OF HOMEPAGE BODY -->
+		<div class="home-body">
+
+
+		    <h2>New Tech Drops</h2>
+
+		    <p>
+		        lorem ipsum dolor sit amet consectetur adipiscing elit nobis
+		        elit voluptatum et cupiditate optio repellendus culpa aute
+		        in deleniti nobis nobis accusamus mollit est voluptatum
+		        officia sint cum sint nulla occaecat voluptas cupidatat
+		        consequat temporibus repellendus ut officia blanditiis
+		        qui nostrud expedita possimus officia velit consectetur
+		        quod illum elit dignissimos
+		    </p>
+
+		    <img
+		        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
+		        alt="New Tech Drops">
+
+		    <br>
+		    <br>
+
+		    <h3>Events</h3>
+
+		    <p>
+		        lorem ipsum dolor sit amet consectetur adipiscing elit nobis
+		        elit voluptatum et cupiditate optio repellendus culpa aute
+		        in deleniti nobis nobis accusamus mollit est voluptatum
+		        officia sint cum sint nulla occaecat voluptas cupidatat
+		        consequat temporibus repellendus ut officia blanditiis
+		        qui nostrud expedita possimus officia velit consectetur
+		        quod illum elit dignissimos
+		    </p>
+
+		    <img
+		        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
+		        alt="Events">
+
+		</div>
+		<!-- END HOMEPAGE BODY -->
+		
 		<!-- TODO: events, announcements and polls once those tables are hooked up -->
+		
+
+
 	</main>
+	
+	<!-- Bootstrap JavaScript: place before closing body tag -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

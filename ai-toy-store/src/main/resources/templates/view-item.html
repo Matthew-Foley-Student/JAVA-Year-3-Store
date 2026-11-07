@@ -2,9 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
-	<main class="container" layout:fragment="content">
+	<main class="container" layout:fragment="content"  style="color: white;">
 		<a th:href="@{/shop}">&larr; Back to shop</a>
 		<h1 class="mt-2" th:text="${product.name}"></h1>
+		<img
+		src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
+		th:alt="${product.name}">
 		<p class="text-muted" th:text="${product.category.name}"></p>
 		<p th:text="${product.description}"></p>
 		<h3 th:text="${#numbers.formatCurrency(product.price)}"></h3>

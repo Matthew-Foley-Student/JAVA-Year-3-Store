@@ -11,8 +11,11 @@
 	<link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
+	
+	<!--Replaces the top with the header.html-->
 	<div th:replace="~{fragments/header :: header}"></div>
 
+	
 	<main class="container flex-grow-1" layout:fragment="content">
 		<p>Page content goes here.</p>
 	</main>
@@ -20,5 +23,6 @@
 	<div th:replace="~{fragments/footer :: footer}"></div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 </body>
 </html>

@@ -51,6 +51,7 @@ public class ProductService {
 	public List<Product> getProductsByCategory(String categoryName) {
 		return productRepository.findByCategoryNameAndActiveTrue(categoryName);
 	}
+	
 
 	public List<Product> getFeaturedProducts() {
 		return productRepository.findByFeaturedTrueAndActiveTrue();
