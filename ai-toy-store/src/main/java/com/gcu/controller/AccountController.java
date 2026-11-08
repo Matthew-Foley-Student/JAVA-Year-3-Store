@@ -3,6 +3,7 @@ package com.gcu.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,9 @@ public class AccountController {
 	private final UserServiceInterface userService;
 	private final OrderService orderService;
 
+	// Spring injects the "userService" bean from SpringConfig (Dependency Injection),
+	// so this controller never has to create or pick the service itself
+	@Autowired
 	public AccountController(UserServiceInterface userService, OrderService orderService) {
 		this.userService = userService;
 		this.orderService = orderService;

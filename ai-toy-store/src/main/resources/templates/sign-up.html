@@ -2,10 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
+<<<<<<< HEAD
 	<main class="container d-flex justify-content-center align-items-center"
 	layout:fragment="content"
 	style="min-height: 80vh;">
 		<div class="sign-up">
+=======
+	<main class="container sign-up-page" layout:fragment="content">
+>>>>>>> branch 'backend-milestone2' of https://github.com/Matthew-Foley-Student/JAVA-Year-3-Store
 		<h1>Create an Account</h1>
 		<form th:action="@{/sign-up}" th:object="${signUpForm}" method="post" style="max-width: 450px">
 			<div class="row">

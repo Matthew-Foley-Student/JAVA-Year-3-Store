@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
+<<<<<<< HEAD
 <body >
 	
 	<main class="container d-flex justify-content-center align-items-center"
@@ -8,6 +9,11 @@
 	style="min-height: 40vh;">
 				<div class = "sign-in-window" >
 		<h1>Welcome!</h1>
+=======
+<body>
+	<main class="container login-page" layout:fragment="content">
+		<h1>Login</h1>
+>>>>>>> branch 'backend-milestone2' of https://github.com/Matthew-Foley-Student/JAVA-Year-3-Store
 		<form th:action="@{/login}" th:object="${loginForm}" method="post" style="max-width: 400px">
 			<div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 			<div class="mb-3">

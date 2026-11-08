@@ -1,18 +1,21 @@
 package com.gcu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gcu.business.ProductService;
+import com.gcu.business.ProductServiceInterface;
 
 @Controller
 public class HomeController {
 
-	private final ProductService productService;
+	private final ProductServiceInterface productService;
 
-	public HomeController(ProductService productService) {
+	// Spring injects the "productService" bean from SpringConfig (Dependency Injection)
+	@Autowired
+	public HomeController(ProductServiceInterface productService) {
 		this.productService = productService;
 	}
 

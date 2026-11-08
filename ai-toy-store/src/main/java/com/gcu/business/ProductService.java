@@ -2,7 +2,6 @@ package com.gcu.business;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gcu.data.CartItemRepository;
@@ -15,8 +14,10 @@ import com.gcu.data.entity.Inventory;
 import com.gcu.data.entity.Product;
 import com.gcu.model.ProductForm;
 
-@Service
-public class ProductService {
+// database version of the product module (MySQL products, categories and inventory tables)
+// turned on with app.products.in-memory=false in application.properties
+// SpringConfig creates this class as the "productService" bean (IoC), so it has no @Service
+public class ProductService implements ProductServiceInterface {
 
 	private final ProductRepository productRepository;
 	private final CategoryRepository categoryRepository;
@@ -34,11 +35,23 @@ public class ProductService {
 		this.orderItemRepository = orderItemRepository;
 	}
 
+	@Override
+	public void init() {
+		System.out.println("ProductService.init(): products come from MySQL");
+	}
+
+	@Override
+	public void destroy() {
+		System.out.println("ProductService.destroy()");
+	}
+
+	@Override
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
 	}
 
 	// sort can be "name", "price-low" or "price-high" (from the shop page dropdown)
+	@Override
 	public List<Product> getActiveProducts(String sort) {
 		if ("price-low".equals(sort)) {
 			return productRepository.findByActiveTrueOrderByPriceAsc();
@@ -48,31 +61,38 @@ public class ProductService {
 		return productRepository.findByActiveTrueOrderByNameAsc();
 	}
 
+	@Override
 	public List<Product> getProductsByCategory(String categoryName) {
 		return productRepository.findByCategoryNameAndActiveTrue(categoryName);
 	}
 	
 
+	@Override
 	public List<Product> getFeaturedProducts() {
 		return productRepository.findByFeaturedTrueAndActiveTrue();
 	}
 
+	@Override
 	public List<Product> getNewArrivals() {
 		return productRepository.findTop4ByActiveTrueOrderByCreatedAtDesc();
 	}
 
+	@Override
 	public Product getProduct(Long id) {
 		return productRepository.findById(id).orElse(null);
 	}
 
+	@Override
 	public List<Category> getCategories() {
 		return categoryRepository.findAll();
 	}
 
+	@Override
 	public boolean skuExists(String sku) {
 		return productRepository.existsBySku(sku);
 	}
 
+	@Override
 	@Transactional
 	public Product createProduct(ProductForm form) {
 		Product product = new Product();
@@ -86,6 +106,7 @@ public class ProductService {
 		return product;
 	}
 
+	@Override
 	@Transactional
 	public Product updateProduct(ProductForm form) {
 		Product product = productRepository.findById(form.getId()).orElse(null);
@@ -104,6 +125,7 @@ public class ProductService {
 
 	// if the product is already in a cart or an order the foreign keys won't let us delete it,
 	// so in that case we just set it inactive so it stops showing in the shop
+	@Override
 	@Transactional
 	public void deleteProduct(Long id) {
 		Product product = productRepository.findById(id).orElse(null);
@@ -120,6 +142,7 @@ public class ProductService {
 	}
 
 	// used to fill in the update form with the current values
+	@Override
 	public ProductForm toForm(Product product) {
 		ProductForm form = new ProductForm();
 		form.setId(product.getId());

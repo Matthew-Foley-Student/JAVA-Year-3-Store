@@ -325,6 +325,7 @@ body::before {
 
 
 
+<<<<<<< HEAD
 .contact-us-body {
 	flex-direction: row;
 	display: flex;
@@ -334,3 +335,15 @@ body::before {
 	margin-top: 50px;
 }
 
+=======
+
+/* white text on the dark background for the account and product pages
+   (Matthew's change for login, sign up and create product, plus the other product and account pages) */
+.login-page,
+.sign-up-page,
+.product-create-page,
+.product-page,
+.account-page {
+    color: white;
+}
+>>>>>>> branch 'backend-milestone2' of https://github.com/Matthew-Foley-Student/JAVA-Year-3-Store

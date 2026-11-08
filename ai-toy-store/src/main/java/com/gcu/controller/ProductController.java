@@ -2,6 +2,7 @@ package com.gcu.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gcu.business.ProductService;
+import com.gcu.business.ProductServiceInterface;
 import com.gcu.data.entity.Product;
 import com.gcu.model.ProductForm;
 
@@ -21,9 +22,11 @@ import com.gcu.model.ProductForm;
 @RequestMapping("/products")
 public class ProductController {
 
-	private final ProductService productService;
+	private final ProductServiceInterface productService;
 
-	public ProductController(ProductService productService) {
+	// Spring injects the "productService" bean from SpringConfig (Dependency Injection)
+	@Autowired
+	public ProductController(ProductServiceInterface productService) {
 		this.productService = productService;
 	}
 
