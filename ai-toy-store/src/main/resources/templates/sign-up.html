@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
-	<main class="container" layout:fragment="content">
+	<main class="container d-flex justify-content-center align-items-center"
+	layout:fragment="content"
+	style="min-height: 80vh;">
+		<div class="sign-up">
 		<h1>Create an Account</h1>
 		<form th:action="@{/sign-up}" th:object="${signUpForm}" method="post" style="max-width: 450px">
 			<div class="row">
@@ -40,6 +43,7 @@
 			<button class="btn btn-primary">Sign up</button>
 			<p class="mt-3">Already have an account? <a th:href="@{/login}">Log in</a></p>
 		</form>
+				</div>
 	</main>
 </body>
 </html>
