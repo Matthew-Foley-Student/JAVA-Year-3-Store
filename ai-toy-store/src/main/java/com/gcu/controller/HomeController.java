@@ -1,0 +1,59 @@
+package com.gcu.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gcu.business.ProductServiceInterface;
+
+@Controller
+public class HomeController {
+
+	private final ProductServiceInterface productService;
+
+	// Spring injects the "productService" bean from SpringConfig (Dependency Injection)
+	@Autowired
+	public HomeController(ProductServiceInterface productService) {
+		this.productService = productService;
+	}
+
+	
+	// TEST TO MAKE SURE PAGES WORK
+	@GetMapping("/test")
+	public String test(Model model)
+	{
+		model.addAttribute("testMessage", "This is a test!");
+		return "test";
+	}
+	
+	
+	@GetMapping({ "/", "/home" })
+	public String home(Model model) {
+		// TEST MESSAGE
+		System.out.println("HOME CONTROLLER REACHED!");
+		model.addAttribute("title", "Home");
+		model.addAttribute("featured", productService.getFeaturedProducts());
+		model.addAttribute("newArrivals", productService.getNewArrivals());
+		return "home";
+	}
+
+	@GetMapping("/about-us")
+	public String aboutUs(Model model) {
+		model.addAttribute("title", "About Us");
+		return "about-us";
+	}
+
+	@GetMapping("/help-faqs")
+	public String helpFaqs(Model model) {
+		model.addAttribute("title", "Help/FAQs");
+		return "help-faqs";
+	}
+
+	@GetMapping("/contact-us")
+	public String contactUs(Model model) {
+		model.addAttribute("title", "Contact Us");
+		return "contact-us";
+	}
+}

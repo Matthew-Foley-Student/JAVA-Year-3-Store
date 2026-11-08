@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="header" style="position: static;"> <!--Start of Header-->
+		<div class="header-row" style="background-color: black; height: 175px;">
+			<!-- Logo -->
+			<img src="/images/strike-logo.png"
+			alt="Strike Technologies Logo" class="logo">
+			<!-- Navigation Bar -->
+			<nav aria-label="NavBar">
+			    <ul class="pagination">
+
+			        <li class="page-item"
+			            th:classappend="${title == 'Home'} ? ' active' : ''">
+			            <a class="page-link"
+			               th:href="@{/home}"
+			               th:aria-current="${title == 'Home'} ? 'page' : null">
+			                Home
+			            </a>
+			        </li>
+
+			        <li class="page-item"
+			            th:classappend="${primaryTitle == 'Shop'} ? ' active' : ''">
+			            <a class="page-link"
+			               th:href="@{/shop}">
+			                Shop
+			            </a>
+			        </li>
+
+					<!-- Cart Button - No separate page -->
+					<li class="page-item">
+					    <button class="page-link cart-button"
+					            type="button"
+					            commandfor="drawerScrolling"
+					            command="show-modal">
+					        Cart
+					    </button>
+					</li>
+					
+			        <li class="page-item"
+			            th:classappend="${title == 'About Us'} ? ' active' : ''">
+			            <a class="page-link"
+			               th:href="@{/about-us}">
+			                About Us
+			            </a>
+			        </li>
+
+			        <li class="page-item"
+			            th:classappend="${title == 'Help/FAQs'} ? ' active' : ''">
+			            <a class="page-link"
+			               th:href="@{/help-faqs}">
+			                Help/FAQs
+			            </a>
+			        </li>
+
+			    </ul>
+			</nav>
+	
+			<!-- Account Dropdown -->
+			        <div class="dropdown">
+			            <button
+			                class="btn btn-primary dropdown-toggle"
+			                type="button"
+			                data-bs-toggle="dropdown"
+			                aria-expanded="false">
+			                Account
+			            </button>
+
+			            <ul class="dropdown-menu">
+			                <li>
+			                    <a class="dropdown-item" th:href="@{/login}">
+			                        Sign In
+			                    </a>
+			                </li>
+
+			                <li>
+			                    <a class="dropdown-item" th:href="@{/account}">
+			                        Account Settings
+			                    </a>
+			                </li>
+
+			            </ul>
+			        </div>
+
+			    </div> <!-- END HEADER ROW -->
+
+
+			    <!-- SHOPPING CART DRAWER -->
+			    <dialog class="drawerCart drawer-start"
+			            id="drawerScrolling"
+			            aria-labelledby="drawerScrollingLabel">
+
+			        <div class="drawer-header">
+			            <h5 class="drawer-title" id="drawerScrollingLabel">
+			                Shopping Cart
+			            </h5>
+
+			            <button type="button"
+			                    class="btn-close"
+			                    commandfor="drawerScrolling"
+			                    command="close"
+			                    aria-label="Close">
+			            </button>
+			        </div>
+
+			        <div class="drawer-body">
+			            <p>Your shopping cart is currently empty.</p>
+			        </div>
+
+			    </dialog>
+			    <!-- END SHOPPING CART DRAWER -->
+
+			</div>
+	<!-- END HEADER ROW -->
+	<!-- SHOPPING CART DRAWER -->
+	<dialog class="drawerCart drawer-start"
+	        id="drawerScrolling"
+	        aria-labelledby="drawerScrollingLabel">
+
+	    <div class="drawer-header">
+
+	        <h5 class="drawer-title" id="drawerScrollingLabel">
+	            Shopping Cart
+	        </h5>
+
+			<button type="button"
+			        class="btn-close"
+			        onclick="document.getElementById('drawerScrolling').close()"
+			        aria-label="Close">
+			</button>
+
+	    </div>
+
+	    <div class="drawer-body">
+
+			<a th:href="@{/shop}">&larr; Back to shop</a>
+			<h1 class="mt-2" th:text="${product.name}"></h1>
+			<img
+			src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
+			th:alt="${product.name}">
+
+	    </div>
+
+	</dialog>
+	<!-- END SHOPPING CART DRAWER --><!-- SHOPPING CART DRAWER -->
+	<dialog class="drawer drawer-start shop"
+	        id="drawerScrolling"
+	        aria-labelledby="drawerScrollingLabel">
+
+	    <div class="drawer-header">
+	        <h5 class="drawer-title" id="drawerScrollingLabel">
+	            Shopping Cart
+	        </h5>
+
+	        <button type="button"
+	                class="btn-close"
+	                commandfor="drawerScrolling"
+	                command="close"
+	                aria-label="Close">
+	        </button>
+	    </div>
+
+	    <div class="drawer-body">
+	        <p>Your shopping cart is currently empty.</p>
+	    </div>
+
+	</dialog>
+	<!-- END SHOPPING CART DRAWER -->
+
+</div> <!--End of header-->
+<br>
+
+
+<!-- Bootstrap JavaScript: place before closing body tag -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

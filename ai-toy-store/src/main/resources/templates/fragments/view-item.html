@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<!--Edit the View Item Drawer here-->
+	<div class="drawer-body-shop" th:fragment="view-item">
+		
+		<img
+		src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
+		th:alt="${p.name}">
+	    <p th:text="${p.description}"></p>
+
+	    <h3 th:text="${#numbers.formatCurrency(p.price)}"></h3>
+
+	    <p th:text="${p.stock} + ' in stock'"></p>
+		
+		<form th:action="@{/cart/add}" method="post" class="d-flex gap-2" style="max-width: 250px" th:if="${p.stock > 0}">
+			<input type="hidden" name="productId" th:value="${p.id}">
+			<input type="number" name="quantity" value="1" min="1" th:max="${p.stock}" class="form-control">
+			<button type="submit" class="btn btn-primary">Add to cart</button>
+		</form>
+
+	</div>
+
+</body>
+</html>

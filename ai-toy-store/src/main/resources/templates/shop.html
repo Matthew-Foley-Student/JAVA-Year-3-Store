@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/defaultTemplate}">
+<body>
+	<main class="container" layout:fragment="content">
+	<div class = "shop-body">
+		<div class="d-flex justify-content-between align-items-center mb-3">
+		<h1 th:text="${heading}">Shop</h1>
+		
+		<form th:action="${#httpServletRequest.requestURI}" method="get">
+
+		    <select name="sort" class="form-select" onchange="this.form.submit()">
+
+		        <option value="name" th:selected="${sort == 'name'}">Name</option>
+
+		        <option value="price-low" th:selected="${sort == 'price-low'}">Price: low to high</option>
+
+		        <option value="price-high" th:selected="${sort == 'price-high'}">Price: high to low</option>
+
+		    </select>
+		</form>
+		</div>
+		<!-- SHOP LAYOUT -->
+		<div class="row">
+			<div class="col-md-3">
+			    <div class="category-sidebar">
+
+			        <div class="nav nav-pills flex-column">
+
+			            <a class="nav-link"
+			               th:href="@{/shop}"
+			               th:classappend="${activeCategory == 'all'} ? ' active' : ''">
+			                All Products
+			            </a>
+
+			            <a class="nav-link"
+			               th:href="@{/shop/ai-toy-models}"
+			               th:classappend="${activeCategory == 'toys'} ? ' active' : ''">
+			                Toys
+			            </a>
+
+			            <a class="nav-link"
+			               th:href="@{/shop/accessories}"
+			               th:classappend="${activeCategory == 'accessories'} ? ' active' : ''">
+			                Accessories
+			            </a>
+
+			            <a class="nav-link"
+			               th:href="@{/shop/merch}"
+			               th:classappend="${activeCategory == 'merch'} ? ' active' : ''">
+			                Merch
+			            </a>
+
+			        </div>
+			    </div>
+			</div>
+		    <!-- RIGHT SIDE: PRODUCTS -->
+		    <div class="col-md-9">
+		        <p th:if="${products.isEmpty()}">
+		            No products here yet.
+		        </p>
+		        <div class="row row-cols-1 row-cols-md-3 g-3">
+
+					<div class="col" th:each="p : ${products}">
+
+					    <div class="card h-100">
+
+					        <div class="card-body">
+
+					            <h5 class="card-title" th:text="${p.name}">Product</h5>
+
+					            <p class="card-text text-muted small"
+					               th:text="${p.category.name}"></p>
+
+					            <p class="card-text fw-bold"
+					               th:text="${#numbers.formatCurrency(p.price)}"></p>
+
+					            <a class="btn btn-sm btn-outline-primary"
+					               href="#"
+					               th:attr="onclick=|document.getElementById('itemViewDrawer-${p.id}').showModal(); return false;|">
+					                View
+					            </a>
+
+					        </div>
+					    </div>
+
+					    <!-- Individual drawer for each product -->
+					    <dialog class="drawer drawer-start"
+					            th:id="|itemViewDrawer-${p.id}|">
+
+					        <div class="drawer-header">
+
+					            <h5 class="drawer-title" th:text="${p.name}"></h5>
+
+					            <button type="button"
+					                    class="btn-close"
+					                    th:attr="onclick=|document.getElementById('itemViewDrawer-${p.id}').close()|"
+					                    aria-label="Close">
+					            </button>
+
+					        </div>
+							
+							<!--Using view-item html-->
+							<div th:replace="~{fragments/view-item :: view-item}" ></div>
+
+					    </dialog>
+
+					</div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</main>
+	<!-- END ITEM VIEW DRAWER -->
+	
+</body>
+</html>
