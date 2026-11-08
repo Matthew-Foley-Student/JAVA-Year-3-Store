@@ -4,9 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import com.gcu.data.entity.User;
 import com.gcu.model.SignUpForm;
@@ -14,15 +12,17 @@ import com.gcu.model.SignUpForm;
 // Milestone 2 version of registration and login: no database.
 // Users are kept in a map in memory, so they are gone when the app restarts.
 // There is one test account ready to log in with: testuser (or test@aitoystore.com) / password123
-@Service
-@ConditionalOnProperty(name = "app.users.in-memory", havingValue = "true", matchIfMissing = true)
+// Milestone 3: no @Service anymore. SpringConfig creates this class as the "userService" bean (IoC).
 public class InMemoryUserService implements UserServiceInterface {
 
 	private final Map<Long, User> users = new ConcurrentHashMap<>();
 	private final AtomicLong nextId = new AtomicLong(1);
 	private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-	public InMemoryUserService() {
+	// Spring calls this right after it creates the bean (initMethod in SpringConfig)
+	@Override
+	public void init() {
+		System.out.println("InMemoryUserService.init(): adding the test account (no database)");
 		SignUpForm test = new SignUpForm();
 		test.setFirstName("Test");
 		test.setLastName("User");
@@ -31,6 +31,13 @@ public class InMemoryUserService implements UserServiceInterface {
 		test.setUsername("testuser");
 		test.setPassword("password123");
 		register(test);
+	}
+
+	// Spring calls this when the app shuts down (destroyMethod in SpringConfig)
+	@Override
+	public void destroy() {
+		System.out.println("InMemoryUserService.destroy(): clearing " + users.size() + " users");
+		users.clear();
 	}
 
 	@Override

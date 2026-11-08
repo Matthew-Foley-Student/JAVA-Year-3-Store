@@ -267,3 +267,13 @@ color:white;
 
 
 
+
+/* white text on the dark background for the account and product pages
+   (Matthew's change for login, sign up and create product, plus the other product and account pages) */
+.login-page,
+.sign-up-page,
+.product-create-page,
+.product-page,
+.account-page {
+    color: white;
+}

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
-	<main class="container" layout:fragment="content">
+	<main class="container sign-up-page" layout:fragment="content">
 		<h1>Create an Account</h1>
 		<form th:action="@{/sign-up}" th:object="${signUpForm}" method="post" style="max-width: 450px">
 			<div class="row">

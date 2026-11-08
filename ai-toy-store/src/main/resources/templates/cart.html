@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
-	<main class="container" layout:fragment="content">
+	<main class="container account-page" layout:fragment="content">
 		<h1>Your Cart</h1>
 		<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
 		<p th:if="${cart.items.isEmpty()}">Your cart is empty. <a th:href="@{/shop}">Go shopping</a></p>
-		<table class="table" th:if="${!cart.items.isEmpty()}">
+		<table class="table table-dark" th:if="${!cart.items.isEmpty()}">
 			<thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead>
 			<tbody>
 				<tr th:each="item : ${cart.items}">

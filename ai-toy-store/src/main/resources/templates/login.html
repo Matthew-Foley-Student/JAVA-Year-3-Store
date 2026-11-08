@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
-	<main class="container" layout:fragment="content">
+	<main class="container login-page" layout:fragment="content">
 		<h1>Login</h1>
 		<form th:action="@{/login}" th:object="${loginForm}" method="post" style="max-width: 400px">
 			<div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>

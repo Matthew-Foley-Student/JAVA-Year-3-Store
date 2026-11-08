@@ -1,20 +1,23 @@
 package com.gcu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gcu.business.ProductService;
+import com.gcu.business.ProductServiceInterface;
 import com.gcu.data.entity.Product;
 
 @Controller
 public class ShopController {
 
-	private final ProductService productService;
+	private final ProductServiceInterface productService;
 
-	public ShopController(ProductService productService) {
+	// Spring injects the "productService" bean from SpringConfig (Dependency Injection)
+	@Autowired
+	public ShopController(ProductServiceInterface productService) {
 		this.productService = productService;
 	}
 
@@ -68,7 +71,8 @@ public class ShopController {
 		model.addAttribute("primaryTitle", "Shop");
 		model.addAttribute("title", product.getName());
 		model.addAttribute("product", product);
-		return "view-item";
+		// view-item.html was moved into the fragments folder
+		return "fragments/view-item";
 	}
 	
 

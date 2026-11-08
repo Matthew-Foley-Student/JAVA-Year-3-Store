@@ -1,8 +1,6 @@
 package com.gcu.business;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import com.gcu.data.UserRepository;
 import com.gcu.data.entity.User;
@@ -11,8 +9,7 @@ import com.gcu.model.SignUpForm;
 // database version of registration and login (MySQL users table)
 // turned on with app.users.in-memory=false in application.properties
 // needs the username column from Dominick's ai_toy_store_milestone2_updates.sql script
-@Service
-@ConditionalOnProperty(name = "app.users.in-memory", havingValue = "false")
+// SpringConfig creates this class as the "userService" bean (IoC), so it has no @Service
 public class UserService implements UserServiceInterface {
 
 	private final UserRepository userRepository;
@@ -20,6 +17,16 @@ public class UserService implements UserServiceInterface {
 
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
+	}
+
+	@Override
+	public void init() {
+		System.out.println("UserService.init(): users are saved in MySQL");
+	}
+
+	@Override
+	public void destroy() {
+		System.out.println("UserService.destroy()");
 	}
 
 	@Override

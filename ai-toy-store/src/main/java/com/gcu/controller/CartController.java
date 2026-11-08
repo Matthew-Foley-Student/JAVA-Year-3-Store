@@ -39,6 +39,7 @@ public class CartController {
 		if (userId == null) {
 			return "redirect:/login";
 		}
+		checkCartAvailable();
 		ShoppingCart cart = cartService.getCart(userId);
 		BigDecimal subtotal = cart.getSubtotal();
 		BigDecimal tax = orderService.calculateTax(subtotal);
@@ -60,6 +61,7 @@ public class CartController {
 		if (userId == null) {
 			return "redirect:/login";
 		}
+		checkCartAvailable();
 		cartService.addItem(userId, productId, quantity);
 		return "redirect:/cart";
 	}
@@ -70,6 +72,7 @@ public class CartController {
 		if (userId == null) {
 			return "redirect:/login";
 		}
+		checkCartAvailable();
 		cartService.updateQuantity(userId, cartItemId, quantity);
 		return "redirect:/cart";
 	}
@@ -80,6 +83,7 @@ public class CartController {
 		if (userId == null) {
 			return "redirect:/login";
 		}
+		checkCartAvailable();
 		cartService.removeItem(userId, cartItemId);
 		return "redirect:/cart";
 	}
@@ -90,6 +94,7 @@ public class CartController {
 		if (userId == null) {
 			return "redirect:/login";
 		}
+		checkCartAvailable();
 		try {
 			Order order = orderService.placeOrder(userId);
 			redirect.addFlashAttribute("message", "Order #" + order.getId() + " placed!");
@@ -100,11 +105,19 @@ public class CartController {
 		}
 	}
 
-	// Milestone 2: users are only in memory, so they don't have a row in the users table yet
-	// and the cart can't be created. Show a message instead of an error page.
+	// Milestones 2 and 3: users and products are only in memory, so they don't have rows in the
+	// database yet and the cart can't be created. Show a message instead of an error page.
+	// without a database (Milestone 3) there is no cart to load, so the handler below shows a
+	// message instead. checked here before any database call so it works even without MySQL running
+	private void checkCartAvailable() {
+		if (!cartService.isAvailable()) {
+			throw new NoSuchElementException("The cart needs the database");
+		}
+	}
+
 	@ExceptionHandler(NoSuchElementException.class)
 	public String cartUnavailable(RedirectAttributes redirect) {
-		redirect.addFlashAttribute("message", "The cart will be available once accounts are saved to the database.");
+		redirect.addFlashAttribute("message", "The cart will be available once the store is connected to the database in Milestone 4.");
 		return "redirect:/account";
 	}
 }

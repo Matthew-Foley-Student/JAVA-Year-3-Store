@@ -25,11 +25,21 @@ public class CartService {
 	@Value("${app.users.in-memory:true}")
 	private boolean usersInMemory;
 
+	// Milestone 3: products are in memory too, so their ids don't match the products table
+	@Value("${app.products.in-memory:true}")
+	private boolean productsInMemory;
+
 	public CartService(ShoppingCartRepository cartRepository, ProductRepository productRepository,
 			UserRepository userRepository) {
 		this.cartRepository = cartRepository;
 		this.productRepository = productRepository;
 		this.userRepository = userRepository;
+	}
+
+	// the cart is saved in MySQL, so it only works when users and products are in the database.
+	// this is not @Transactional on purpose, so it can be checked without MySQL running
+	public boolean isAvailable() {
+		return !usersInMemory && !productsInMemory;
 	}
 
 	// gets the user's cart, or makes a new one the first time

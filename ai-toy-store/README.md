@@ -64,10 +64,29 @@ content in `<main layout:fragment="content">`. The nav is in `templates/fragment
 - The cart needs a real user row, so while users are in memory the cart sends you to your account page
   with a message instead. It works again with `app.users.in-memory=false` (after running Dominick's username script).
 
+## Milestone 3: Spring Beans, IoC and products without a database
+
+- `config/SpringConfig.java` is a `@Configuration` class. It creates the two services as Spring beans
+  with `@Bean(name = ..., initMethod = "init", destroyMethod = "destroy")`:
+  - `userService` (registration and login): `InMemoryUserService` now, `UserService` (MySQL) later.
+  - `productService` (product creation module): `InMemoryProductService` now, `ProductService` (MySQL) later.
+- The service classes don't have `@Service` anymore and nothing calls `new` on them. Spring creates them
+  (Inversion of Control) and injects them into the controllers through their constructors (Dependency Injection).
+- The controllers only use the interfaces (`UserServiceInterface`, `ProductServiceInterface`), so switching
+  to MySQL in Milestone 4 is just `app.users.in-memory=false` and `app.products.in-memory=false`.
+- When the app starts you'll see `InMemoryProductService.init()` and `InMemoryUserService.init()` in the console,
+  and the `destroy()` messages when it stops. That shows Spring managing the bean lifecycle.
+- `InMemoryProductService` starts with the same 4 categories and 5 products as Dominick's SQL script.
+  Products you create, edit or delete at `/products` are kept in memory, so they reset when the app restarts.
+- The app now starts even if MySQL isn't running. The cart still needs the database, so until Milestone 4
+  it sends you to your account page with a message.
+- `Milestone3Tests` checks that Spring injects the right beans and that create product, sign up and login work
+  with no database.
+
 ## Notes / still to do
 
 - Entities are done for the 8 core tables. The other 14 (addresses, promo codes, loyalty, polls, etc.) are next.
-- Login and sign up don't use the database yet (Milestone 2 requirement). See above.
+- Login, sign up and products don't use the database yet (Milestone 2 and 3 requirement). See above.
 - Login just saves the user in the session for now. We can switch to Spring Security when we get to it in class, and lock `/products` to admins.
 - Cart only works when logged in because `shopping_carts.user_id` is required. Guest cart can come later.
 - Tax (8%) and shipping ($5.99) are hard coded in `OrderService` for now.
