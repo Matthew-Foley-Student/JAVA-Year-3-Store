@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/defaultTemplate}">
-<body>
-	<main class="container" layout:fragment="content">
-		<h1>Login</h1>
+<body >
+	
+	<main class="container d-flex justify-content-center align-items-center"
+	layout:fragment="content"
+	style="min-height: 40vh;">
+				<div class = "sign-in-window" >
+		<h1>Welcome!</h1>
 		<form th:action="@{/login}" th:object="${loginForm}" method="post" style="max-width: 400px">
 			<div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 			<div class="mb-3">
@@ -19,6 +23,9 @@
 			<button class="btn btn-primary">Log in</button>
 			<p class="mt-3">New here? <a th:href="@{/sign-up}">Create an account</a></p>
 		</form>
+				</div>
+	
 	</main>
+		
 </body>
 </html>

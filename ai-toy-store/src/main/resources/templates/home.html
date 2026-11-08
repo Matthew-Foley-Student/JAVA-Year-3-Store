@@ -3,11 +3,30 @@
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
 	<main class="container" layout:fragment="content">
-		<div class="p-5 mb-4 bg-light rounded-3">
-			<h1>Your AI friend, wherever you go</h1>
-			<p class="lead">Robot pets and dolls that talk, learn, and travel with you.</p>
-			<a class="btn btn-primary" th:href="@{/shop}">Shop now</a>
-			<a class="btn btn-outline-secondary" th:href="@{/sign-up}" th:if="${session.userId == null}">Sign up</a>
+		<br>
+		<div class="p-5 mb-4 rounded-3 text-white"
+		     style="background-image:
+		            linear-gradient(to right, rgba(0,0,0,0.45), transparent),
+		            url('/images/strike-person-holding-toy.png');
+		            background-size: cover;
+		            background-position: center;
+		            min-height: 400px;">
+
+		    <div class="container-fluid py-5">
+
+		        <h1 class="display-5 fw-bold">
+		            Your AI friend, wherever you go
+		        </h1>
+
+		        <p class="col-md-6 fs-4">
+		            Experience the next generation of AI-powered interactive toys.
+		        </p>
+
+		        <a href="/shop" class="btn btn-primary btn-lg">
+		            Shop Now
+		        </a>
+
+		    </div>
 		</div>
 
 		<!--The Summary of latest features-->
@@ -26,7 +45,7 @@
 		</div>
 		
 		<!--New Arrivals card block-->
-		<h2>New Arrivals</h2>
+		<h2 style="color: white;">New Arrivals</h2>
 		<div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
 			<div class="col" th:each="p : ${newArrivals}">
 				<div class="card h-100">
@@ -74,14 +93,85 @@
 		        qui nostrud expedita possimus officia velit consectetur
 		        quod illum elit dignissimos
 		    </p>
+			
+			<!-- New Tech Drops Carousel -->
 
-		    <img
-		        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
-		        alt="New Tech Drops">
+			<div id="carouselExampleAutoplaying"
+			     class="carousel slide carousel-fade"
+			     data-bs-ride="carousel"
+			     data-bs-interval="3000">
+
+			    <!-- Indicators -->
+			    <div class="carousel-indicators">
+			        <button type="button"
+			                data-bs-target="#carouselExampleAutoplaying"
+			                data-bs-slide-to="0"
+			                class="active"
+			                aria-current="true">
+			        </button>
+
+			        <button type="button"
+			                data-bs-target="#carouselExampleAutoplaying"
+			                data-bs-slide-to="1">
+			        </button>
+
+			        <button type="button"
+			                data-bs-target="#carouselExampleAutoplaying"
+			                data-bs-slide-to="2">
+			        </button>
+			    </div>
+
+			    <!-- Images -->
+			    <div class="carousel-inner rounded-5">
+
+			        <div class="carousel-item active">
+			            <img src="/images/strike-cat-toy.png"
+			                 class="d-block w-100"
+			                 alt="AI Cat Toy"
+							  style="width: 500px;height: 500px;">
+			        </div>
+
+			        <div class="carousel-item">
+			            <img src="/images/strike-dog-toy.png"
+			                 class="d-block w-100"
+			                 alt="AI Dog Toy"
+							  style="width: 500px;height: 500px;">
+			        </div>
+
+			        <div class="carousel-item">
+			            <img src="/images/strike-toy-robot.png"
+			                 class="d-block w-100"
+			                 alt="AI Robot Toy"
+							 style="width: 500px;height: 500px;">
+			        </div>
+
+			    </div>
+
+			    <!-- Previous -->
+			    <button class="carousel-control-prev"
+			            type="button"
+			            data-bs-target="#carouselExampleAutoplaying"
+			            data-bs-slide="prev">
+
+			        <span class="carousel-control-prev-icon"></span>
+			        <span class="visually-hidden">Previous</span>
+			    </button>
+
+			    <!-- Next -->
+			    <button class="carousel-control-next"
+			            type="button"
+			            data-bs-target="#carouselExampleAutoplaying"
+			            data-bs-slide="next">
+
+			        <span class="carousel-control-next-icon"></span>
+			        <span class="visually-hidden">Next</span>
+			    </button>
+
+			</div>
 
 		    <br>
 		    <br>
-
+		
 		    <h3>Events</h3>
 
 		    <p>
@@ -94,9 +184,7 @@
 		        quod illum elit dignissimos
 		    </p>
 
-		    <img
-		        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKPMqwz7G27fyHxvGAEq2CkH1hW3PGaByP8YiP6VeA&s=10"
-		        alt="Events">
+	
 
 		</div>
 		<!-- END HOMEPAGE BODY -->

@@ -3,6 +3,7 @@
 	layout:decorate="~{layouts/defaultTemplate}">
 <body>
 	<main class="container" layout:fragment="content">
+		<div class="account">
 		<h1>My Account</h1>
 		<div class="alert alert-info" th:if="${message}" th:text="${message}"></div>
 		<div class="card mb-4" style="max-width: 500px">
@@ -29,6 +30,7 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
 	</main>
 </body>
 </html>

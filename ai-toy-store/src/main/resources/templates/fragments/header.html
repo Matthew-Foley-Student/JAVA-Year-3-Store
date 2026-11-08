@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-	<div th:fragment="header"> <!--Start of Header-->
-		<div class="header-row">
+	<div th:fragment="header" style="position: static;"> <!--Start of Header-->
+		<div class="header-row" style="background-color: black; height: 175px;">
+			<!-- Logo -->
+			<img src="/images/strike-logo.png"
+			alt="Strike Technologies Logo" class="logo">
 			<!-- Navigation Bar -->
 			<nav aria-label="NavBar">
 			    <ul class="pagination">
@@ -65,22 +68,17 @@
 
 			            <ul class="dropdown-menu">
 			                <li>
-			                    <a class="dropdown-item" th:href="@{/sign-in}">
+			                    <a class="dropdown-item" th:href="@{/login}">
 			                        Sign In
 			                    </a>
 			                </li>
 
 			                <li>
-			                    <a class="dropdown-item" href="account-settings.html">
+			                    <a class="dropdown-item" th:href="@{/account}">
 			                        Account Settings
 			                    </a>
 			                </li>
 
-			                <li>
-			                    <a class="dropdown-item" href="sign-up.html">
-			                        Sign up!
-			                    </a>
-			                </li>
 			            </ul>
 			        </div>
 
@@ -170,6 +168,8 @@
 	<!-- END SHOPPING CART DRAWER -->
 
 </div> <!--End of header-->
+<br>
+
 
 <!-- Bootstrap JavaScript: place before closing body tag -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
